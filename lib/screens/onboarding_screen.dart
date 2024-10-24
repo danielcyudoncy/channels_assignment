@@ -26,7 +26,7 @@ class OnboardingScreen extends GetView<OnboardingScreenController> {
             children: [
               // Placeholder for logo or another image
               const Image(
-                image: AssetImage('assets/images/onboarding_image.png'), // Replace with actual image
+                image: AssetImage('assets/png/logo.png'), // Replace with actual image
                 height: 150,
               ),
               const SizedBox(height: 20),

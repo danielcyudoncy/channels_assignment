@@ -1,24 +1,15 @@
-import 'package:assignmentapp/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'routes/app_routes.dart';
+import 'bindings/app_bindings.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
+  runApp(
+    GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Assignment App',
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.splash, // Set your initial route
       getPages: AppRoutes.routes,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-    );
-  }
+      initialBinding: AppBindings(),  // Use your bindings here
+    ),
+  );
 }

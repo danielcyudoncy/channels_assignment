@@ -1,7 +1,5 @@
 import 'package:assignmentapp/controllers/splash_controller.dart';
 import 'package:assignmentapp/utils/constants/app_colors.dart';
-import 'package:assignmentapp/utils/constants/app_fonts_family.dart';
-import 'package:assignmentapp/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,8 +28,8 @@ class SplashScreen extends StatelessWidget {
               'Your home for news',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: AppSizes.fontSmall,
-                fontFamily: AppFontsStyles.montserrat,
+                fontSize: 18, // Adjusted to a fixed font size
+                fontFamily: 'Montserrat', // Example font, adjust as necessary
               ),
             ),
           ],

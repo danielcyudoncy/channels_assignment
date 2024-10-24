@@ -85,6 +85,8 @@ flutter:
     - assets/icons/notification.png
     - assets/icons/profile.png
     - assets/icons/update_profile.png
+    - assets/png/Splash Screen.png
+    - assets/png/backgroundColor.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

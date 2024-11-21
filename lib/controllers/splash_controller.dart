@@ -1,15 +1,17 @@
-import 'package:assignmentapp/screens/onboarding_screen.dart';
 import 'package:get/get.dart';
+import 'package:assignmentapp/routes/app_routes.dart';
 
 class SplashController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _navigateToHome();
+    // Start a timer and navigate to the next page
+    _navigateToNextPage();
   }
 
-  Future<void> _navigateToHome() async {
-    await Future.delayed(const Duration(seconds: 3));
-    Get.offAll(() => const OnboardingScreen()); // Navigate and clear the stack
+  // Function to navigate after a delay
+  void _navigateToNextPage() async {
+    await Future.delayed(const Duration(seconds: 3)); // Delay of 3 seconds
+    Get.offAllNamed(AppRoutes.onboarding); // Navigate to Onboarding screen
   }
 }

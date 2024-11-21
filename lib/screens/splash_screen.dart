@@ -1,14 +1,14 @@
-import 'package:assignmentapp/controllers/splash_controller.dart';
-import 'package:assignmentapp/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:assignmentapp/controllers/splash_controller.dart';
+import 'package:assignmentapp/utils/constants/app_colors.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the SplashController
+    // Initialize SplashController (This will be done in the controller binding)
     Get.put(SplashController());
 
     return Scaffold(
@@ -17,19 +17,21 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Logo Image
             Image.asset(
               'assets/png/logo.png',
-              height: 188,
+              height: 180,
               width: 180,
               semanticLabel: 'App Logo',
             ),
             const SizedBox(height: 20),
+            // Tagline text
             const Text(
               'Your home for news',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18, // Adjusted to a fixed font size
-                fontFamily: 'Montserrat', // Example font, adjust as necessary
+                fontSize: 18,
+                fontFamily: 'Montserrat',
               ),
             ),
           ],

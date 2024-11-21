@@ -1,40 +1,30 @@
-import 'package:assignmentapp/controllers/onboarding_controller.dart';
-import 'package:assignmentapp/utils/constants/app_colors.dart';
-import 'package:assignmentapp/utils/constants/app_fonts_family.dart';
-import 'package:assignmentapp/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:get/get.dart';
+import '../controllers/get_started_controller.dart'; // Import the GetStartedScreenController
+import '../utils/constants/app_colors.dart'; // Custom colors for your app
+import '../utils/constants/app_fonts_family.dart'; // Custom fonts
+import '../utils/constants/app_sizes.dart'; // Custom sizes
 
-class OnboardingScreen extends GetView<OnboardingScreenController> {
-  const OnboardingScreen({super.key});
+class GetStartedScreen extends GetView<GetStartedScreenController> {
+  const GetStartedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false, // Removes the back button
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      // ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/png/backgroundColor.png'), // Path to your background image
-            fit: BoxFit.cover, // Ensures the image covers the entire background
-          ),
-        ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Top spacing and logo
             const SizedBox(height: 60),
             const Image(
               image: AssetImage('assets/png/logo.png'),
               height: 150,
             ),
             const SizedBox(height: 80),
-            // Welcome title
+            // Title Text
             const Text(
-              'Welcome!',
+              "Get Started",
               style: TextStyle(
                 fontSize: 38,
                 fontWeight: FontWeight.bold,
@@ -42,11 +32,11 @@ class OnboardingScreen extends GetView<OnboardingScreenController> {
               ),
             ),
             const SizedBox(height: 10),
-            // Welcome description
+            // Description Text
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                'Thanks for joining! Access or create your account below, and get started on your journey!',
+                "Welcome to the app! Let's get you started on your journey.",
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.black,
@@ -54,11 +44,33 @@ class OnboardingScreen extends GetView<OnboardingScreenController> {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 350),
-            // Buttons
+            const Spacer(), // Push buttons to the bottom
+            // Buttons for navigation
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Back Button to Onboarding Screen
+                ElevatedButton(
+                  onPressed: controller.onBackToOnboarding,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    backgroundColor: AppColors.saveColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(9),
+                    ),
+                  ),
+                  child: const Text(
+                    'Back to Onboarding',
+                    style: TextStyle(
+                      fontFamily: AppFontsStyles.openSans,
+                      fontSize: AppSizes.fontNormal,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 15),
+                // Get Started Button
                 ElevatedButton(
                   onPressed: controller.onGetStarted,
                   style: ElevatedButton.styleFrom(
@@ -75,26 +87,6 @@ class OnboardingScreen extends GetView<OnboardingScreenController> {
                       fontSize: AppSizes.fontNormal,
                       fontWeight: FontWeight.bold,
                       color: AppColors.black,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 15),
-                ElevatedButton(
-                  onPressed: controller.onMyAccount,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    backgroundColor: AppColors.saveColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                  ),
-                  child: const Text(
-                    'My Account',
-                    style: TextStyle(
-                      fontFamily: AppFontsStyles.openSans,
-                      fontSize: AppSizes.fontNormal,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
                     ),
                   ),
                 ),

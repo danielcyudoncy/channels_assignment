@@ -9,7 +9,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splash, // Set your initial route
       getPages: AppRoutes.routes,
-      initialBinding: AppBindings(),  // Use your bindings here
+      initialBinding: AppBindings(),  // Initialize bindings here
     ),
   );
 }

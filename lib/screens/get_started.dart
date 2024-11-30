@@ -81,18 +81,18 @@ class GetStartedScreen extends GetView<GetStartedScreenController> {
                   child: Column(
                     children: [
                       AppTextField(
-                        header: "Email", 
+                        label: "Email", 
                         hint: "Enter Email address", 
                         controller: emailController, 
                         validator: (email) => AppValidator.validateEmail(email), 
                         inputType: TextInputType.emailAddress,
-                        isHidden: true,
+                        isHidden: false,
                       ),
           
                       Padding(
                         padding: const EdgeInsets.only(top: 18.0),
                         child: AppTextField(
-                          header: "Password", 
+                          label: "Password", 
                           hint: "Enter password", 
                           controller: passwordController, 
                           validator: (password) => AppValidator.validateTextState(password), 

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class AppTextField extends StatelessWidget {
   const AppTextField({
     super.key, 
-    required this.header, 
+    required this.label, 
     required this.hint, 
     required this.controller, 
     required this.validator, 
@@ -16,7 +16,7 @@ class AppTextField extends StatelessWidget {
     this.hintColor
   });
 
-  final String header, hint;
+  final String label, hint;
   final Color? hintColor;
   final TextEditingController controller;
   final String? Function(String?) validator;
@@ -31,7 +31,7 @@ class AppTextField extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            header,
+            label,
             style: TextStyle(
               fontSize: AppSizes.fontNormal,
               fontFamily: AppFontsStyles.openSans,
@@ -42,7 +42,7 @@ class AppTextField extends StatelessWidget {
         ),
 
         Padding(
-          padding: const EdgeInsets.only(top: 4.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: TextFormField(
             obscureText: isHidden,
 
@@ -72,7 +72,7 @@ class AppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4.0),
                 borderSide: const BorderSide(
                   width: 1.0,
-                  color: AppColors.white
+                  color: AppColors.tertiaryColor
                 )
               ),
 

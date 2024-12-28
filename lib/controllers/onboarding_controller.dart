@@ -11,7 +11,7 @@ class OnboardingScreenController extends GetxController {
   // Navigate to the next screen (Home or Dashboard) when "Get Started" is pressed
   void onGetStarted() {
     // Replacing all routes and pushing to the home screen (adjust route if needed)
-    Get.offAllNamed(AppRoutes.getStarted); // Ensure AppRoutes.getStarted is defined in routes
+    Get.offAllNamed(AppRoutes.authScreen); // Ensure AppRoutes.getStarted is defined in routes
   }
 
   // Navigate to the account-related page or home screen when "My Account" is pressed

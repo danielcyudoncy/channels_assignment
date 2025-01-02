@@ -1,12 +1,19 @@
 import 'package:assignmentapp/controllers/auth_controller.dart';
+import 'package:assignmentapp/screens/create_account_screen.dart';
 import 'package:assignmentapp/utils/constants/app_colors.dart';
 import 'package:assignmentapp/utils/constants/app_fonts_family.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:get/get.dart';
 
 class AuthScreen extends GetView<AuthController> {
   const AuthScreen({super.key});
+
+  // Email Validation Logic (Basic Email Regex)
+  bool _isValidEmail(String email) {
+    String pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    RegExp regex = RegExp(pattern);
+    return regex.hasMatch(email);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +39,8 @@ class AuthScreen extends GetView<AuthController> {
                     image: AssetImage('assets/png/logo.png'),
                     height: 150,
                   ),
-                  const SizedBox(height: 80),
-                  
+                  const SizedBox(height: 80), 
+
                   // Container for all form elements
                   Container(
                     height: 600,
@@ -64,14 +71,29 @@ class AuthScreen extends GetView<AuthController> {
                           icon: Icons.email,
                         ),
                         const SizedBox(height: 16),
-                        _PasswordTextField( // Custom Password Field with Toggle
+                        _PasswordTextField(
                           labelText: 'Password',
                           hintText: 'Enter your password',
                           onChanged: controller.setPassword,
                         ),
                         const SizedBox(height: 24),
                         Obx(() => ElevatedButton(
-                          onPressed: controller.isLoading.value ? null : controller.createAccount,
+                          onPressed: controller.isLoading.value ? null : () {
+                            String email = controller.email.value;  // Accessing the value of the observable
+                            if (_isValidEmail(email)) {
+                              // If email is valid, navigate to the Create Account screen
+                              Get.to(() => CreateAccountScreen());
+                            } else {
+                              // Show an error message if email is invalid
+                              Get.snackbar(
+                                "Invalid Email",
+                                "Please enter a valid email address.",
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: Colors.red,
+                                colorText: Colors.white,
+                              );
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
                             backgroundColor: AppColors.primaryColor,
@@ -164,8 +186,8 @@ class AuthScreen extends GetView<AuthController> {
         onChanged: onChanged,
         obscureText: obscureText,
         decoration: InputDecoration(
-          labelText: labelText,           // Label text
-          hintText: hintText,             // Hint text
+          labelText: labelText,
+          hintText: hintText,
           prefixIcon: icon != null ? Icon(icon) : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),

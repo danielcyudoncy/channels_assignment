@@ -104,7 +104,6 @@ class CreateAccountScreen extends GetView<CreateAccountController> {
                             }).toList(),
                             decoration: InputDecoration(
                               labelText: 'Role',
-                              hintText: 'Select your role',
                               prefixIcon: const Icon(Icons.account_circle),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),

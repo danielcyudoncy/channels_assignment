@@ -4,6 +4,7 @@ class CreateAccountController extends GetxController {
   // Reactive variables to hold form input values and loading state
   var email = ''.obs;
   var password = ''.obs;
+  var fullName = ''.obs;
   var isLoading = false.obs;
   var role = ''.obs;
   var profileImage = ''.obs;

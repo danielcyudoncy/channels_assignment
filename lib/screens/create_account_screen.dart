@@ -1,10 +1,10 @@
-import 'package:assignmentapp/controllers/create_account_controller.dart';
 import 'package:assignmentapp/widget/image_picker_widget.dart';
 import 'package:assignmentapp/widget/role_dropdown_widget.dart';
-import 'package:assignmentapp/widget/save_button_widget.dart';
 import 'package:assignmentapp/widget/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:assignmentapp/controllers/create_account_controller.dart';
+import 'package:assignmentapp/screens/update_account_screen.dart'; // Import the Update Account screen
 
 class CreateAccountScreen extends GetView<CreateAccountController> {
   const CreateAccountScreen({super.key});
@@ -86,7 +86,7 @@ class CreateAccountScreen extends GetView<CreateAccountController> {
           const SizedBox(height: 17),
 
           // Save & Continue Button
-          buildSaveButton(controller),
+          buildSaveButton(context),
         ],
       ),
     );
@@ -117,6 +117,30 @@ class CreateAccountScreen extends GetView<CreateAccountController> {
         color: Colors.black,
       ),
       textAlign: TextAlign.center,
+    );
+  }
+
+  // Save & Continue Button
+  Widget buildSaveButton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        // Validate the form before navigation
+        if (controller.validateForm()) {
+          // Navigate to the UpdateAccountScreen after validation
+          Get.to(() => const UpdateAccountScreen());
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.blue, // Set your button color
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+      ),
+      child: const Text(
+        'Save & Continue',
+        style: TextStyle(color: Colors.white, fontSize: 16),
+      ),
     );
   }
 }

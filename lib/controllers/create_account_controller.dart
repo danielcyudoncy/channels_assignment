@@ -9,7 +9,7 @@ class CreateAccountController extends GetxController {
 
   // Example function to simulate account creation process
   void createAccount() async {
-    if (_validateForm()) {
+    if (validateForm()) {
       try {
         isLoading.value = true;
 
@@ -30,7 +30,7 @@ class CreateAccountController extends GetxController {
   }
 
   // Example form validation method (simplified without email and password validation)
-  bool _validateForm() {
+  bool validateForm() {
     if (fullName.value.isEmpty) {
       Get.snackbar('Error', 'Full Name is required');
       return false;

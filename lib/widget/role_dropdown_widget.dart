@@ -10,8 +10,8 @@ Widget buildRoleDropdown(CreateAccountController controller) {
     ),
     child: Obx(() => DropdownButtonFormField<String>(
       value: controller.role.value.isEmpty ? null : controller.role.value,
-      onChanged: (String? newValue) {
-        controller.role.value = newValue ?? '';
+      onChanged: (newValue) {
+        controller.role.value = newValue!;
       },
       items: <String>['Admin', 'Assignment Head', 'HODs', 'DOPs']
           .map<DropdownMenuItem<String>>((String value) {

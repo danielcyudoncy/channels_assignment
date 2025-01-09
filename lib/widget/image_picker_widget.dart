@@ -11,14 +11,23 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
   return Column(
     children: [
       Obx(() {
-        return CircleAvatar(
-          radius: 50,
-          backgroundImage: controller.profileImage.value.isEmpty
-              ? const AssetImage('assets/png/placeholder_image.png') as ImageProvider
-              : FileImage(File(controller.profileImage.value)) as ImageProvider,
-          child: controller.profileImage.value.isEmpty
-              ? const Icon(Icons.camera_alt, color: AppColors.primaryColor)
-              : null,
+        // Wrap CircleAvatar with a Container to add a border
+        return Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,  // Make the border circular
+            border: controller.profileImage.value.isEmpty
+                ? Border.all(color: AppColors.primaryColor, width: 2)  // Outline when no image is picked
+                : null,  // No border if image is available
+          ),
+          child: CircleAvatar(
+            radius: 50,
+            backgroundImage: controller.profileImage.value.isEmpty
+                ? const AssetImage('assets/png/placeholder_image.png') as ImageProvider
+                : FileImage(File(controller.profileImage.value)) as ImageProvider,
+            child: controller.profileImage.value.isEmpty
+                ? const Icon(Icons.camera_alt, color: AppColors.primaryColor)
+                : null,
+          ),
         );
       }),
       const SizedBox(height: 16),
@@ -69,7 +78,7 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
           ),
         ),
         child: const Text(
-          'Change Image',
+          'Change Photo',
           style: TextStyle(
             color: AppColors.black,
             fontSize: 16,

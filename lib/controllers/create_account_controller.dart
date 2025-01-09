@@ -2,8 +2,6 @@ import 'package:get/get.dart';
 
 class CreateAccountController extends GetxController {
   // Reactive variables to hold form input values and loading state
-  var email = ''.obs;
-  var password = ''.obs;
   var fullName = ''.obs;
   var isLoading = false.obs;
   var role = ''.obs;
@@ -31,19 +29,16 @@ class CreateAccountController extends GetxController {
     }
   }
 
-  // Example form validation method
+  // Example form validation method (simplified without email and password validation)
   bool _validateForm() {
-    if (email.value.isEmpty) {
-      Get.snackbar('Error', 'Email is required');
+    if (fullName.value.isEmpty) {
+      Get.snackbar('Error', 'Full Name is required');
       return false;
-    } else if (!GetUtils.isEmail(email.value)) {
-      Get.snackbar('Error', 'Please enter a valid email');
+    } else if (role.value.isEmpty) {
+      Get.snackbar('Error', 'Please select a role');
       return false;
-    } else if (password.value.isEmpty) {
-      Get.snackbar('Error', 'Password is required');
-      return false;
-    } else if (password.value.length < 6) {
-      Get.snackbar('Error', 'Password must be at least 6 characters');
+    } else if (profileImage.value.isEmpty) {
+      Get.snackbar('Error', 'Profile image is required');
       return false;
     }
 

@@ -1,12 +1,13 @@
-import 'package:assignmentapp/controllers/auth_controller.dart';
+import 'package:assignmentapp/controllers/get_started_controller.dart';
 import 'package:assignmentapp/screens/create_account_screen.dart';
 import 'package:assignmentapp/utils/constants/app_colors.dart';
 import 'package:assignmentapp/utils/constants/app_fonts_family.dart';
+import 'package:assignmentapp/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AuthScreen extends GetView<AuthController> {
-  const AuthScreen({super.key});
+class GetStartedScreen extends GetView<GetStartedController> {
+  const GetStartedScreen({super.key});
 
   // Email Validation Logic (Basic Email Regex)
   bool _isValidEmail(String email) {
@@ -57,7 +58,7 @@ class AuthScreen extends GetView<AuthController> {
                           'Get Started',
                           style: TextStyle(
                             fontFamily: AppFontsStyles.montserrat,
-                            fontSize: 24,
+                            fontSize: AppSizes.titleSmall,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
@@ -70,26 +71,26 @@ class AuthScreen extends GetView<AuthController> {
                           onChanged: controller.setEmail,
                           icon: Icons.email,
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 30),
                         _PasswordTextField(
                           labelText: 'Password',
                           hintText: 'Enter your password',
                           onChanged: controller.setPassword,
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 30),
                         Obx(() => ElevatedButton(
                           onPressed: controller.isLoading.value ? null : () {
                             String email = controller.email.value;  // Accessing the value of the observable
                             if (_isValidEmail(email)) {
                               // If email is valid, navigate to the Create Account screen
-                              Get.to(() => CreateAccountScreen());
+                              Get.to(() => const CreateAccountScreen());
                             } else {
                               // Show an error message if email is invalid
                               Get.snackbar(
                                 "Invalid Email",
                                 "Please enter a valid email address.",
                                 snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: Colors.red,
+                                backgroundColor: AppColors.errorRed,
                                 colorText: Colors.white,
                               );
                             }

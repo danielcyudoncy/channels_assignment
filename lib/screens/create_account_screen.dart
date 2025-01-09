@@ -1,3 +1,4 @@
+import 'package:assignmentapp/utils/constants/app_colors.dart';
 import 'package:assignmentapp/widget/image_picker_widget.dart';
 import 'package:assignmentapp/widget/role_dropdown_widget.dart';
 import 'package:assignmentapp/widget/text_field_widget.dart';
@@ -131,7 +132,7 @@ class CreateAccountScreen extends GetView<CreateAccountController> {
         }
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue, // Set your button color
+        backgroundColor: AppColors.primaryColor, // Set your button color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),

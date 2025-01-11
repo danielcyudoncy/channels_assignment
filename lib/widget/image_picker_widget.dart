@@ -66,12 +66,13 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
 
           // After the image is picked, check if widget is still mounted
           if (pickedImage != null && context.mounted) {
-            controller.profileImage.value = pickedImage.path;
+            controller.profileImage.value = pickedImage.path; // Store image path in controller
+            print('Picked image path: ${controller.profileImage.value}');
           }
         },
         style: TextButton.styleFrom(
           backgroundColor: Colors.grey[300],
-          side: const BorderSide(color: Colors.grey, width: 1),
+          side: const BorderSide(color: Colors.blue, width: 1),
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

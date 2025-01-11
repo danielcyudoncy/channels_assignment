@@ -11,8 +11,8 @@ class GetStartedScreen extends GetView<GetStartedController> {
 
   // Email Validation Logic (Basic Email Regex)
   bool _isValidEmail(String email) {
-    String pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-    RegExp regex = RegExp(pattern);
+    const pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    final regex = RegExp(pattern);
     return regex.hasMatch(email);
   }
 
@@ -40,7 +40,7 @@ class GetStartedScreen extends GetView<GetStartedController> {
                     image: AssetImage('assets/png/logo.png'),
                     height: 150,
                   ),
-                  const SizedBox(height: 80), 
+                  const SizedBox(height: 80),
 
                   // Container for all form elements
                   Container(
@@ -79,22 +79,24 @@ class GetStartedScreen extends GetView<GetStartedController> {
                         ),
                         const SizedBox(height: 30),
                         Obx(() => ElevatedButton(
-                          onPressed: controller.isLoading.value ? null : () {
-                            String email = controller.email.value;  // Accessing the value of the observable
-                            if (_isValidEmail(email)) {
-                              // If email is valid, navigate to the Create Account screen
-                              Get.to(() => const CreateAccountScreen());
-                            } else {
-                              // Show an error message if email is invalid
-                              Get.snackbar(
-                                "Invalid Email",
-                                "Please enter a valid email address.",
-                                snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: AppColors.errorRed,
-                                colorText: Colors.white,
-                              );
-                            }
-                          },
+                          onPressed: controller.isLoading.value
+                              ? null
+                              : () {
+                                  final email = controller.email.value;  // Accessing the value of the observable
+                                  if (_isValidEmail(email)) {
+                                    // If email is valid, navigate to the Create Account screen
+                                    Get.to(() => const CreateAccountScreen());
+                                  } else {
+                                    // Show an error message if email is invalid
+                                    Get.snackbar(
+                                      "Invalid Email",
+                                      "Please enter a valid email address.",
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      backgroundColor: AppColors.errorRed,
+                                      colorText: Colors.white,
+                                    );
+                                  }
+                                },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
                             backgroundColor: AppColors.primaryColor,

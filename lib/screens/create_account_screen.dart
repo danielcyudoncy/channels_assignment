@@ -5,7 +5,7 @@ import 'package:assignmentapp/widget/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:assignmentapp/controllers/create_account_controller.dart';
-import 'package:assignmentapp/screens/update_account_screen.dart'; // Import the Update Account screen
+import 'package:assignmentapp/screens/update_account_screen.dart';
 
 class CreateAccountScreen extends GetView<CreateAccountController> {
   const CreateAccountScreen({super.key});
@@ -98,7 +98,7 @@ class CreateAccountScreen extends GetView<CreateAccountController> {
     return Text(
       text,
       style: const TextStyle(
-        fontFamily: 'Montserrat', 
+        fontFamily: 'Montserrat',
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: Colors.black,
@@ -129,6 +129,11 @@ class CreateAccountScreen extends GetView<CreateAccountController> {
         if (controller.validateForm()) {
           // Navigate to the UpdateAccountScreen after validation
           Get.to(() => const UpdateAccountScreen());
+        } else {
+          // Optionally show an error message when validation fails
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Please fill in all fields correctly.')),
+          );
         }
       },
       style: ElevatedButton.styleFrom(

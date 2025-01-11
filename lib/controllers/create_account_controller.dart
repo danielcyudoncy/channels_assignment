@@ -2,10 +2,11 @@ import 'package:get/get.dart';
 
 class CreateAccountController extends GetxController {
   // Reactive variables to hold form input values and loading state
+  var profileImage = ''.obs;
   var fullName = ''.obs;
   var isLoading = false.obs;
   var role = ''.obs;
-  var profileImage = ''.obs;
+  
 
   // Example function to simulate account creation process
   void createAccount() async {

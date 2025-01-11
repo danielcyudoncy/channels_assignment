@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class GetStartedController extends GetxController {
@@ -17,9 +16,6 @@ class GetStartedController extends GetxController {
       isLoading.value = true;  // Set loading to true
       // Simulated API call for creating an account
       await Future.delayed(const Duration(seconds: 2));
-      if (kDebugMode) {
-        print('Creating account with: ${email.value}');
-      }
     } catch (e) {
       // Show an error message using GetX snackbar
       Get.snackbar('Error', e.toString());
@@ -32,9 +28,6 @@ class GetStartedController extends GetxController {
   void signInWithGoogle() async {
     try {
       // Add your logic for Google SignIn here
-      if (kDebugMode) {
-        print('Google Sign In');
-      }
     } catch (e) {
       // Show an error message using GetX snackbar
       Get.snackbar('Error', e.toString());
@@ -45,9 +38,6 @@ class GetStartedController extends GetxController {
   void signInWithApple() async {
     try {
       // Add your logic for Apple SignIn here
-      if (kDebugMode) {
-        print('Apple Sign In');
-      }
     } catch (e) {
       // Show an error message using GetX snackbar
       Get.snackbar('Error', e.toString());

@@ -34,37 +34,44 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
       const SizedBox(height: 16),
       TextButton(
         onPressed: () async {
+          // Check if the context is mounted
           if (!context.mounted) return;
 
-          final XFile? pickedImage = await showDialog<XFile>(
+          // Show image picker options and pick an image
+          final pickedImage = await showDialog<XFile?>(
             context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Pick an image'),
-              actions: [
-                TextButton(
-                  onPressed: () async {
-                    if (context.mounted) {
-                      Navigator.pop(context, await picker.pickImage(source: ImageSource.gallery));
-                    }
-                  },
-                  child: const Text('Gallery'),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    if (context.mounted) {
-                      Navigator.pop(context, await picker.pickImage(source: ImageSource.camera));
-                    }
-                  },
-                  child: const Text('Camera'),
-                ),
-              ],
-            ),
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Pick an image'),
+                actions: [
+                  TextButton(
+                    onPressed: () async {
+                      // Pick image from gallery
+                      final XFile? picked = await picker.pickImage(source: ImageSource.gallery);
+                      if (picked != null && context.mounted) {
+                        Navigator.of(context).pop(picked);
+                      }
+                    },
+                    child: const Text('Gallery'),
+                  ),
+                  TextButton(
+                    onPressed: () async {
+                      // Pick image from camera
+                      final XFile? picked = await picker.pickImage(source: ImageSource.camera);
+                      if (picked != null && context.mounted) {
+                        Navigator.of(context).pop(picked);
+                      }
+                    },
+                    child: const Text('Camera'),
+                  ),
+                ],
+              );
+            },
           );
 
           // Update the controller's profileImage with the picked image
           if (pickedImage != null && context.mounted) {
             controller.profileImage.value = pickedImage.path;
-            print('Picked image path: ${controller.profileImage.value}');
           }
         },
         style: TextButton.styleFrom(

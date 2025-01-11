@@ -5,7 +5,7 @@ import 'package:assignmentapp/controllers/create_account_controller.dart';
 Widget buildRoleDropdown(CreateAccountController controller) {
   return Container(
     decoration: BoxDecoration(
-      color: Colors.grey.withOpacity(0.3),
+      color: const Color.fromRGBO(169, 169, 169, 0.3),
       borderRadius: BorderRadius.circular(12),
     ),
     child: Obx(() => DropdownButtonFormField<String>(

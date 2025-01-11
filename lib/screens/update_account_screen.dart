@@ -1,24 +1,15 @@
 import 'package:assignmentapp/screens/create_account_screen.dart';
 import 'package:assignmentapp/utils/constants/app_colors.dart';
+import 'package:assignmentapp/utils/constants/app_fonts_family.dart';
+import 'package:assignmentapp/utils/constants/app_sizes.dart';
+import 'package:assignmentapp/utils/validators/app_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:assignmentapp/controllers/update_account_controller.dart';
+  
 
 class UpdateAccountScreen extends GetView<UpdateAccountController> {
   const UpdateAccountScreen({super.key});
-
-  // Basic email and phone validation using regular expressions
-  bool _isValidEmail(String email) {
-    String pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-    RegExp regex = RegExp(pattern);
-    return regex.hasMatch(email);
-  }
-
-  bool _isValidPhoneNumber(String phoneNumber) {
-    String pattern = r"^\+?[1-9]\d{1,14}$"; // International phone number format
-    RegExp regex = RegExp(pattern);
-    return regex.hasMatch(phoneNumber);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +48,15 @@ class UpdateAccountScreen extends GetView<UpdateAccountController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        const Text('Update Account',
+                        style: TextStyle(fontFamily: AppFontsStyles.montserrat,
+                        fontSize: AppSizes.titleLarge,
+                        fontWeight: FontWeight.bold,
+                      color: Colors.black,),),
+                      const SizedBox(height: 10),
+                      const Text('Adjust the content below to update your profile'),
+                      const SizedBox(height: 30),
+                      
                         // Profile Image Section
                         _buildProfileImageSection(),
 
@@ -96,6 +96,7 @@ class UpdateAccountScreen extends GetView<UpdateAccountController> {
           onPressed: controller.pickImage,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
+            side: const BorderSide(color: Colors.blue, width: 1),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -196,12 +197,16 @@ class UpdateAccountScreen extends GetView<UpdateAccountController> {
               child: Text('Admin'),
             ),
             DropdownMenuItem(
-              value: 'User',
-              child: Text('User'),
+              value: 'Assignment Head',
+              child: Text('Assignment Head'),
             ),
             DropdownMenuItem(
-              value: 'Manager',
-              child: Text('Manager'),
+              value: 'HODs',
+              child: Text('HODs'),
+            ),
+            DropdownMenuItem(
+              value: 'DOPs',
+              child: Text('DOPs'),
             ),
           ],
         ),
@@ -210,35 +215,48 @@ class UpdateAccountScreen extends GetView<UpdateAccountController> {
   }
 
   // Save Changes Button
+    // Save Changes Button
   Widget _buildSaveButton() {
-    return Obx(() => ElevatedButton(
-          onPressed: controller.isLoading.value
-              ? null
-              : () {
-                  if (_isValidEmail(controller.email.value) &&
-                      _isValidPhoneNumber(controller.phoneNumber.value)) {
-                    Get.to(() => const CreateAccountScreen());
-                  } else {
-                    Get.snackbar(
-                      "Invalid Input",
-                      "Please enter valid email and phone number.",
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: AppColors.errorRed,
-                      colorText: Colors.white,
-                    );
-                  }
-                },
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white,
-            backgroundColor: AppColors.primaryColor,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+    return Obx(() => SizedBox(
+      width: double.infinity,  // Ensure the button takes full width
+      child: ElevatedButton(
+        onPressed: controller.isLoading.value
+            ? null
+            : () {
+                // Using the AppValidator methods to validate email and phone
+                String? emailError = AppValidator.validateEmail(controller.email.value);
+                String? phoneError = AppValidator.validatePhone(controller.phoneNumber.value);
+
+                if (emailError == null && phoneError == null) {
+                  Get.to(() => const CreateAccountScreen());
+                } else {
+                  // Show validation error messages
+                  String errorMessage = '';
+                  if (emailError != null) errorMessage += '$emailError\n';
+                  if (phoneError != null) errorMessage += phoneError;
+
+                  Get.snackbar(
+                    "Invalid Input",
+                    errorMessage,
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: AppColors.errorRed,
+                    colorText: Colors.white,
+                  );
+                }
+              },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primaryColor, // Set your button color
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
-          child: controller.isLoading.value
-              ? const CircularProgressIndicator(color: Colors.white)
-              : const Text('Save Changes'),
-        ));
+          padding: const EdgeInsets.symmetric(vertical: 16),
+        ),
+        child: const Text(
+          'Save & Continue',
+          style: TextStyle(color: Colors.white, fontSize: 16),
+        ),
+      ),
+    ));
   }
+
 }

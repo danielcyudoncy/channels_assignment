@@ -1,4 +1,4 @@
-import 'package:assignmentapp/screens/create_account_screen.dart';
+import 'package:assignmentapp/screens/saved_success_screen.dart';
 import 'package:assignmentapp/utils/constants/app_colors.dart';
 import 'package:assignmentapp/utils/constants/app_fonts_family.dart';
 import 'package:assignmentapp/utils/constants/app_sizes.dart';
@@ -228,7 +228,7 @@ class UpdateAccountScreen extends GetView<UpdateAccountController> {
                 String? phoneError = AppValidator.validatePhone(controller.phoneNumber.value);
 
                 if (emailError == null && phoneError == null) {
-                  Get.to(() => const CreateAccountScreen());
+                  Get.to(() => const SavedSuccessScreen());
                 } else {
                   // Show validation error messages
                   String errorMessage = '';

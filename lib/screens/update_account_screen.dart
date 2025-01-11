@@ -151,7 +151,7 @@ class UpdateAccountScreen extends GetView<UpdateAccountController> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.3),
+        color: const Color.fromRGBO(169, 169, 169, 0.3),
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextField(
@@ -175,7 +175,7 @@ class UpdateAccountScreen extends GetView<UpdateAccountController> {
     return Obx(() {
       return Container(
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.3),
+          color: const Color.fromRGBO(169, 169, 169, 0.3),
           borderRadius: BorderRadius.circular(12),
         ),
         child: DropdownButtonFormField<String>(

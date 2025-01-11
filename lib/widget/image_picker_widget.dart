@@ -38,7 +38,7 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
           if (!context.mounted) return;
 
           // Show image picker options and pick an image
-          final pickedImage = await showDialog<XFile?>(
+          final pickedImage = await showDialog<XFile?>( // Show dialog for image picker
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
@@ -49,7 +49,7 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
                       // Pick image from gallery
                       final XFile? picked = await picker.pickImage(source: ImageSource.gallery);
                       if (picked != null && context.mounted) {
-                        Navigator.of(context).pop(picked);
+                        Navigator.of(context).pop(picked);  // Close dialog with the picked image
                       }
                     },
                     child: const Text('Gallery'),
@@ -59,7 +59,7 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
                       // Pick image from camera
                       final XFile? picked = await picker.pickImage(source: ImageSource.camera);
                       if (picked != null && context.mounted) {
-                        Navigator.of(context).pop(picked);
+                        Navigator.of(context).pop(picked);  // Close dialog with the picked image
                       }
                     },
                     child: const Text('Camera'),
@@ -69,7 +69,7 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
             },
           );
 
-          // Update the controller's profileImage with the picked image
+          // Ensure context is still mounted before updating the controller's profileImage
           if (pickedImage != null && context.mounted) {
             controller.profileImage.value = pickedImage.path;
           }

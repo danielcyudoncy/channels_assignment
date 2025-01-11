@@ -8,7 +8,7 @@ Widget buildTextField({
 }) {
   return Container(
     decoration: BoxDecoration(
-      color: Colors.grey.withOpacity(0.3),
+      color: const Color.fromRGBO(169, 169, 169, 0.3),
       borderRadius: BorderRadius.circular(12),
     ),
     child: TextField(

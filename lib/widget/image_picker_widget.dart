@@ -34,11 +34,8 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
       const SizedBox(height: 16),
       TextButton(
         onPressed: () async {
-          // Check if the context is mounted
-          if (!context.mounted) return;
-
           // Show image picker options and pick an image
-          final pickedImage = await showDialog<XFile?>( // Show dialog for image picker
+          final pickedImage = await showDialog<XFile?>(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
@@ -48,9 +45,7 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
                     onPressed: () async {
                       // Pick image from gallery
                       final XFile? picked = await picker.pickImage(source: ImageSource.gallery);
-                      if (picked != null && context.mounted) {
-                        Navigator.of(context).pop(picked);  // Close dialog with the picked image
-                      }
+                      Navigator.of(context).pop(picked);  // Close dialog with the picked image
                     },
                     child: const Text('Gallery'),
                   ),
@@ -58,9 +53,7 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
                     onPressed: () async {
                       // Pick image from camera
                       final XFile? picked = await picker.pickImage(source: ImageSource.camera);
-                      if (picked != null && context.mounted) {
-                        Navigator.of(context).pop(picked);  // Close dialog with the picked image
-                      }
+                      Navigator.of(context).pop(picked);  // Close dialog with the picked image
                     },
                     child: const Text('Camera'),
                   ),
@@ -70,7 +63,7 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
           );
 
           // Ensure context is still mounted before updating the controller's profileImage
-          if (pickedImage != null && context.mounted) {
+          if (pickedImage != null) {
             controller.profileImage.value = pickedImage.path;
           }
         },

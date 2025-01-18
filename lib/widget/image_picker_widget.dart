@@ -34,35 +34,7 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
       const SizedBox(height: 16),
       TextButton(
         onPressed: () async {
-          // Show image picker options and pick an image
-          final pickedImage = await showDialog<XFile?>(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text('Pick an image'),
-                actions: [
-                  TextButton(
-                    onPressed: () async {
-                      // Pick image from gallery
-                      final XFile? picked = await picker.pickImage(source: ImageSource.gallery);
-                      Navigator.of(context).pop(picked);  // Close dialog with the picked image
-                    },
-                    child: const Text('Gallery'),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      // Pick image from camera
-                      final XFile? picked = await picker.pickImage(source: ImageSource.camera);
-                      Navigator.of(context).pop(picked);  // Close dialog with the picked image
-                    },
-                    child: const Text('Camera'),
-                  ),
-                ],
-              );
-            },
-          );
-
-          // Ensure context is still mounted before updating the controller's profileImage
+          final pickedImage = await _showImagePickerDialog(context, picker);
           if (pickedImage != null) {
             controller.profileImage.value = pickedImage.path;
           }
@@ -84,5 +56,36 @@ Widget buildImagePicker(BuildContext context, CreateAccountController controller
         ),
       ),
     ],
+  );
+}
+
+Future<XFile?> _showImagePickerDialog(BuildContext context, ImagePicker picker) {
+  return showDialog<XFile?>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Pick an image'),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              final XFile? picked = await picker.pickImage(source: ImageSource.gallery);
+              if (context.mounted) {
+                Navigator.of(context).pop(picked);  // Close dialog with the picked image
+              }
+            },
+            child: const Text('Gallery'),
+          ),
+          TextButton(
+            onPressed: () async {
+              final XFile? picked = await picker.pickImage(source: ImageSource.camera);
+              if (context.mounted) {
+                Navigator.of(context).pop(picked);  // Close dialog with the picked image
+              }
+            },
+            child: const Text('Camera'),
+          ),
+        ],
+      );
+    },
   );
 }
